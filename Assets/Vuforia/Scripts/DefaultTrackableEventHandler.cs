@@ -20,7 +20,12 @@ namespace Vuforia
     
         #endregion // PRIVATE_MEMBER_VARIABLES
 
+		#region PUBLIC_MEMBER_VARIABLES
 
+		public CharacterController character;
+		public GameController gameCtrl;
+
+		#endregion
 
         #region UNTIY_MONOBEHAVIOUR_METHODS
     
@@ -83,6 +88,9 @@ namespace Vuforia
                 component.enabled = true;
             }
 
+			gameCtrl.AddCharacter (character);
+			Debug.Log ("aparece");
+
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
@@ -103,7 +111,7 @@ namespace Vuforia
             {
                 component.enabled = false;
             }
-
+			gameCtrl.RemoveCharacter (character);
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }
 
