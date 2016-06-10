@@ -4,32 +4,41 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
 	private List<CharacterController> characters= new List<CharacterController>();
-	
+
+	public float attackTimer = 0;
+
 	// Update is called once per frame
 	void Update () {
 		if (characters.Count == 2) {
 			CharacterController character1 = characters [0];
 			CharacterController character2 = characters [1];
-			if (Vector3.Distance (character1.transform.position, character2.transform.position) <= 2) {
-				Debug.Log ("estan cerca");
-				character1.Attack ();
-				character2.Attack ();
+			Debug.Log(character1.name+" vida: "+character1.life +" "+character2.name+" vida: "+character2.life);
+			if (character1.IsAlive () && character2.IsAlive () && attackTimer<=0) {
+				if (Vector3.Distance (character1.transform.position, character2.transform.position) <= 2) {
+					character1.Attack ();
+					character2.Attack ();
 
-				CharacterController.TypeEnum type1 =  character1.type;
-				CharacterController.TypeEnum type2 =  character2.type;
+					CharacterController.TypeEnum type1 = character1.type;
+					CharacterController.TypeEnum type2 = character2.type;
 
-				int takeDamage1 = CalculateDamage(type1, type2);
-				int takeDamage2 = CalculateDamage(type2, type1);
+					int takeDamage1 = CalculateDamage (type1, type2);
+					int takeDamage2 = CalculateDamage (type2, type1);
 
-				if (character1.TakeDamage (takeDamage1)) {
-					character1.PlayDeadAnimation ();
-				}
+					Debug.Log (character1.name + " damage taken: " + takeDamage1 + "  " + character2.name + " damage taken: " + takeDamage2);
 
-				if (character2.TakeDamage (takeDamage2)) {
-					character2.PlayDeadAnimation ();
+					if (character1.TakeDamage (takeDamage1)) {
+						character1.PlayDeadAnimation ();
+					}
+
+					if (character2.TakeDamage (takeDamage2)) {
+						character2.PlayDeadAnimation ();
+					}
+					attackTimer = 3f;
 				}
 			}
 		}
+		if (attackTimer > 0)
+			attackTimer -= 1 * Time.deltaTime;
 	}
 
 	public void AddCharacter(CharacterController character){

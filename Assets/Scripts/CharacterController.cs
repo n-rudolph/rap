@@ -30,7 +30,7 @@ public class CharacterController : MonoBehaviour {
 	}
 
 	public bool IsAlive(){
-		return life <= 0;
+		return life > 0;
 	}
 
 	public void SetTarget(CharacterController target){
