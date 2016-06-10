@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface Attack {
+abstract public class Attack : MonoBehaviour{
 
-	void StartAttacking (bool attack);
+	abstract public void StartAttacking (bool attack);
 }

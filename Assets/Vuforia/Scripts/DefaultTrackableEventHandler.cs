@@ -89,9 +89,6 @@ namespace Vuforia
             }
 
 			gameCtrl.AddCharacter (character);
-			Debug.Log ("aparece");
-
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
 
@@ -112,7 +109,6 @@ namespace Vuforia
                 component.enabled = false;
             }
 			gameCtrl.RemoveCharacter (character);
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }
 
         #endregion // PRIVATE_METHODS
