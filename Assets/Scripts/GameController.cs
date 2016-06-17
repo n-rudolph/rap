@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour {
 		if (characters.Count >= 2) {
 			CharacterController character1 = characters [0];
 			CharacterController character2 = characters [1];
-			Debug.Log(character1.name+" vida: "+character1.life +" "+character2.name+" vida: "+character2.life);
+			//Debug.Log(character1.name+" vida: "+character1.life +" "+character2.name+" vida: "+character2.life);
 			if (character1.IsAlive () && character2.IsAlive () && attackTimer<=0) {
 				if (Vector3.Distance (character1.transform.position, character2.transform.position) <= 2) {
 
