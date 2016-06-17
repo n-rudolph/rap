@@ -5,7 +5,7 @@ public class FeragatorAttack : Attack {
 
 	public ParticleSystem blizzard;
 	public CharacterController ctrl;
-	public SoundController soundCtrl;
+
 
 	private bool attack;
 	private float timer;
@@ -31,7 +31,7 @@ public class FeragatorAttack : Attack {
 		this.attack = attack;
 		blizzard.Play ();
 		timer = 2f;
-		soundCtrl.Play (SoundController.SoundEnum.BLIZZARD);
+
 	}
 
 	private void Stop(){

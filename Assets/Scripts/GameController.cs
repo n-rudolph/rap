@@ -3,21 +3,29 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
-	public SoundController soundCtrl;
+
 
 	private List<CharacterController> characters= new List<CharacterController>();
 
 	public float attackTimer = 0;
 
+	public AudioSource audioSource;
+
+	void Start(){
+		audioSource.Play ();
+	}
+
 	// Update is called once per frame
 	void Update () {
+		
 		if (characters.Count >= 2) {
 			CharacterController character1 = characters [0];
 			CharacterController character2 = characters [1];
 			//Debug.Log(character1.name+" vida: "+character1.life +" "+character2.name+" vida: "+character2.life);
 			if (character1.IsAlive () && character2.IsAlive () && attackTimer<=0) {
+				
 				if (Vector3.Distance (character1.transform.position, character2.transform.position) <= 2) {
-
+					
 					character1.Attack ();
 					character2.Attack ();
 
@@ -33,14 +41,15 @@ public class GameController : MonoBehaviour {
 					character2.TakeDamage (takeDamage2);
 
 					attackTimer = 3f;
-				}
-			}
-		}
+				} 
+			} 
+		} 
 		if (attackTimer > 0)
 			attackTimer -= 1 * Time.deltaTime;
 	}
 
 	public void AddCharacter(CharacterController character){
+		
 		if (characters.Count < 2) {
 			characters.Add (character);
 			if (characters.Count == 2) {
