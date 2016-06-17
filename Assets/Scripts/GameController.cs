@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
+	public SoundController soundCtrl;
+
 	private List<CharacterController> characters= new List<CharacterController>();
 
 	public float attackTimer = 0;

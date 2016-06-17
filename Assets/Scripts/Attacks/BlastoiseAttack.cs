@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BlastoiseAttack : Attack {
 
-
+	public SoundController soundCtrl;
 	public GameObject rightBeam;
 	public GameObject leftBeam;
 	public CharacterController ctrl;
@@ -37,6 +37,7 @@ public class BlastoiseAttack : Attack {
 		leftBeam.SetActive(true);
 		rightBeam.SetActive(true);
 		timer = 2f;
+		soundCtrl.Play (SoundController.SoundEnum.WATERBLAST);
 	}
 
 	private void Stop(){

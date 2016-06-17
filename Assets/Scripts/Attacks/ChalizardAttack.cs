@@ -4,6 +4,7 @@ using System.Collections;
 public class ChalizardAttack : Attack {
 
 	public ParticleSystem fireBlast;
+	public SoundController soundCtrl;
 
 	private bool attack;
 	private bool attacking;
@@ -34,6 +35,7 @@ public class ChalizardAttack : Attack {
 		Attack ();
 		attackTimer = 1f;
 		this.attack = attack;
+		soundCtrl.Play (SoundController.SoundEnum.FIREBLAST);
 	}
 
 	private void Attack (){

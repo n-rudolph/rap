@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BlaizikenAttack : Attack {
 
+	public SoundController soundCtrl;
 	private bool attack = false;
 	private LookAt lookAt;
 
@@ -51,5 +52,6 @@ public class BlaizikenAttack : Attack {
 		direction = true;
 		leftHand.Play ();
 		rightHand.Play ();
+		soundCtrl.Play (SoundController.SoundEnum.FIREBLAST);
 	}
 }
