@@ -21,7 +21,9 @@ public class CharacterController : MonoBehaviour {
 	}
 
 	public void PlayDeadAnimation(){
-
+		Animator anim = gameObject.GetComponent<Animator> ();
+		anim.applyRootMotion = false;
+		anim.SetBool ("dead", true);
 	}
 
 	public bool TakeDamage(int damage){
@@ -39,5 +41,11 @@ public class CharacterController : MonoBehaviour {
 
 	public enum TypeEnum{
 		FIRE, WATER, GRASS, MASTER
+	}
+
+	public void AttackFinished(){
+		if (!IsAlive ()) {
+			PlayDeadAnimation ();
+		}
 	}
 }

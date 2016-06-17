@@ -9,12 +9,13 @@ public class GameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (characters.Count == 2) {
+		if (characters.Count >= 2) {
 			CharacterController character1 = characters [0];
 			CharacterController character2 = characters [1];
 			Debug.Log(character1.name+" vida: "+character1.life +" "+character2.name+" vida: "+character2.life);
 			if (character1.IsAlive () && character2.IsAlive () && attackTimer<=0) {
 				if (Vector3.Distance (character1.transform.position, character2.transform.position) <= 2) {
+
 					character1.Attack ();
 					character2.Attack ();
 
@@ -24,15 +25,11 @@ public class GameController : MonoBehaviour {
 					int takeDamage1 = CalculateDamage (type1, type2);
 					int takeDamage2 = CalculateDamage (type2, type1);
 
-					Debug.Log (character1.name + " damage taken: " + takeDamage1 + "  " + character2.name + " damage taken: " + takeDamage2);
+					//Debug.Log (character1.name + " damage taken: " + takeDamage1 + "  " + character2.name + " damage taken: " + takeDamage2);
 
-					if (character1.TakeDamage (takeDamage1)) {
-						character1.PlayDeadAnimation ();
-					}
+					character1.TakeDamage (takeDamage1);
+					character2.TakeDamage (takeDamage2);
 
-					if (character2.TakeDamage (takeDamage2)) {
-						character2.PlayDeadAnimation ();
-					}
 					attackTimer = 3f;
 				}
 			}
