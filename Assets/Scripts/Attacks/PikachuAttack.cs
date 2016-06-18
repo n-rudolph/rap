@@ -12,25 +12,31 @@ public class PikachuAttack : Attack {
 	public GameObject lightning;
 	private GameObject[] beams = new GameObject[2];
 	private bool damaging = false;
+
+	private CharacterController ctrl;
+	private LookAt lookAt;
 	// Use this for initialization
 	void Start () {
-		
+		lookAt = GetComponent<LookAt> ();
+		ctrl = gameObject.GetComponent<CharacterController> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			attack = true;
-			sphere = Instantiate(thunderBall, startPosition.transform.position, Quaternion.identity) as GameObject;
-		}
-		if (attack && sphere != null) {
-			sphere.transform.position = Vector3.MoveTowards (sphere.transform.position, LookAt.instance.target.transform.position, speed * Time.deltaTime);
-			if (sphere.transform.position == LookAt.instance.target.transform.position) {
+		
+		if (attack && sphere != null ) {
+			Debug.Log ("1");
+			sphere.transform.position = Vector3.MoveTowards (sphere.transform.position, lookAt.target.transform.position, speed * Time.deltaTime);
+			if (Vector3.Distance(sphere.transform.position, lookAt.target.transform.position)<=0.1 ) {
+				Debug.Log ("2");
 				attack = false;
 //				damage = true;
+				ctrl.AttackFinished();
 				Destroy (sphere);
 			}
 		}
+
+
 //		if (damage) {
 //			for (int i = 0; i < 2; i++) {
 //				GameObject newBeam = Instantiate (lightning, LookAt.instance.target.transform.position, Quaternion.identity) as GameObject;
@@ -58,11 +64,11 @@ public class PikachuAttack : Attack {
 
 	private Vector3 GetRandomEndPosition(Vector3 start){
 		Vector3 rnd = new Vector3 (start.x + (Random.Range(5f, 10f)* -1), start.y + (Random.Range(5f, 10f)* -1), start.z + (Random.Range(5f, 10f)* -1));
-		Debug.Log (rnd);
 		return rnd;
 	}
 	override
 	public void StartAttacking(bool attack){
-		this.attack = attack;
+		this.attack = true;
+		sphere = Instantiate(thunderBall, startPosition.transform.position, Quaternion.identity) as GameObject;
 	}
 }

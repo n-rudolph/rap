@@ -9,18 +9,28 @@ public class VenusaurAttack : Attack {
 	private Transform target;
 	public GameObject beam;
 	public GameObject venusaur;
+
+	private LookAt lookAt;
+
+	private CharacterController ctrl;
+
 	// Use this for initialization
 	void Start () {
-		target = GetComponent<LookAt> ().target;
+		
+		lookAt = GetComponent<LookAt> ();
+
+		ctrl = gameObject.GetComponent<CharacterController> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (attack && (lookAt.target!=null)) {
+			attack = false;
 			instance = Instantiate(beam, venusaur.transform.position + new Vector3(0f, 1f, 1f), venusaur.transform.rotation) as GameObject;
-			Vector3 subs = venusaur.transform.position - target.transform.position;
+			Vector3 subs = venusaur.transform.position - lookAt.target.transform.position;
 			beam.GetComponent<BeamParam> ().MaxLength = Mathf.Abs (subs.x) + Mathf.Abs (subs.z);
 			Destroy (instance, 3f);
+			ctrl.AttackFinished ();
 		}
 
 	}
